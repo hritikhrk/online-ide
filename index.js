@@ -3,18 +3,20 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const config = require("./config");
-const bodyParser = require("body-parser");
+const executeCode = require('./executeCode.route');
 
 //using env values
 dotenv.config();
 
 const app = express();
-app.use(cors());
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
-// parse application/json
-app.use(bodyParser.json());
+app.use(cors());
 
 //Handle request here
 app.get("/", (req, res) => {
@@ -25,6 +27,8 @@ app.get("/", (req, res) => {
   console.log(serverRun);
   res.json(serverRun);
 });
+
+app.use('/', executeCode)
 
 // creating server and running
 app.listen(config.PORT, () => {

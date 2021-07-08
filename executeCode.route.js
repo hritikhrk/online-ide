@@ -21,10 +21,11 @@ router.post("/run", (req, res) => {
     (response) => {
       const result = response.data;
       console.log(result);
-      return res.send(result);
+      return res.status(201).send(result);
     },
     (error) => {
       console.log(error);
+      return res.status(400).send(error);
     }
   );
 });

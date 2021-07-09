@@ -21,7 +21,7 @@ function App() {
   const runCode = () => {
     setStatus("Loading...");
     axios
-      .post("http://localhost:5000/run", { language, code, input })
+      .post("https://compile-it-hritikhrk.herokuapp.com/run", { language, code, input })
       .then((res) => {
         if (res.data.memory && res.data.cpuTime) {
           setOutputLogs("");

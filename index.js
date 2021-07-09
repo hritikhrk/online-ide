@@ -3,7 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const config = require("./config");
-const executeCode = require('./executeCode.route');
+const executeCode = require("./executeCode.route");
 
 //using env values
 dotenv.config();
@@ -18,6 +18,16 @@ app.use(
 
 app.use(cors());
 
+// Serve static assets in production
+if (process.env.NODE_ENV == "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
+}
+
 //Handle request here
 app.get("/", (req, res) => {
   const serverRun = {
@@ -28,7 +38,7 @@ app.get("/", (req, res) => {
   res.json(serverRun);
 });
 
-app.use('/', executeCode)
+app.use("/", executeCode);
 
 // creating server and running
 app.listen(config.PORT, () => {

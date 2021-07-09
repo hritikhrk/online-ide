@@ -1,15 +1,25 @@
 import React from "react";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { TextField, Paper } from "@material-ui/core";
+import { useStyles } from "./Styles";
 
-export default function LogsOutput({value}) {
+export default function LogsOutput({ value }) {
+  const classes = useStyles();
   return (
-    <div className="LogsOutput">
-      <TextareaAutosize
-        aria-label="minimum height"
-        minRows={3}
-        placeholder="Minimum 3 rows"
-        value={value}
-      />
+    <div className="OutputLogs">
+    <label>OUTPUT</label>
+      <Paper elevation={6}>
+        <TextField
+          variant="standard"
+          placeholder="Output"
+          multiline
+          rows={9}
+          value={value}
+          className={classes.InputOutput}
+          InputProps={{
+            disableUnderline: true,
+          }}
+        />
+      </Paper>
     </div>
   );
 }

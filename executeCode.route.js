@@ -8,6 +8,8 @@ const clientSecret = config.clientSecret;
 const router = express.Router();
 
 router.post("/run", (req, res) => {
+  if (req.body.language == "python") req.body.language = "python3";
+  if (req.body.language == "c_cpp") req.body.language = "cpp17";
   var programData = {
     clientId: clientId,
     clientSecret: clientSecret,
@@ -16,7 +18,6 @@ router.post("/run", (req, res) => {
     stdin: req.body.input,
     versionIndex: "0",
   };
-
   axios.post("https://api.jdoodle.com/v1/execute", programData).then(
     (response) => {
       const result = response.data;

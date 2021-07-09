@@ -1,17 +1,27 @@
 // Library Imports
 import React from "react";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { TextField, Paper } from "@material-ui/core";
+import { useStyles } from "./Styles";
 
 const EditorInput = ({ value, onInputChange }) => {
+  const classes = useStyles();
   return (
     <div className="InputEditor">
-      <TextareaAutosize
-        aria-label="minimum height"
-        minRows={3}
-        placeholder="Minimum 3 rows"
-        value={value}
-        onChange={(event)=>onInputChange(event.target.value)}
-      />
+    <label>INPUT</label>
+      <Paper elevation={6}>
+        <TextField
+          variant="standard"
+          placeholder="Input"
+          multiline
+          rows={9}
+          value={value}
+          onChange={(event) => onInputChange(event.target.value)}
+          className={classes.InputOutput}
+          InputProps={{
+            disableUnderline: true,
+          }}
+        />
+      </Paper>
     </div>
   );
 };

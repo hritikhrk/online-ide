@@ -4,6 +4,7 @@ import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-monokai";
 
 const Editor = ({ value, onCodeChange, programmingLanguage }) => {
@@ -31,6 +32,7 @@ const Editor = ({ value, onCodeChange, programmingLanguage }) => {
         showLineNumbers: true,
         tabSize: 2,
       }}
+      width="100%"
     />
   );
 };

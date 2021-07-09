@@ -8,15 +8,18 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(4),
     minWidth: 120,
+    margin: theme.spacing(4),
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
+  customButtom: {
+    margin: theme.spacing(4),
+    minHeight: 54,
+    minWidth: 100,
+  }
 }));
 
 export const Header = function () {
@@ -39,9 +42,9 @@ export const HeadSection = function ({
 }) {
   const classes = useStyles();
   return (
-    <div>
-      <div>
-        <FormControl variant="outlined" className={classes.formControl}>
+    <Grid container justifyContent="center">
+      <Grid item md={3}>
+        <FormControl variant="filled" className={classes.formControl}>
           <InputLabel id="language-select-label">Language</InputLabel>
           <Select
             labelId="language-select-label"
@@ -50,21 +53,24 @@ export const HeadSection = function ({
             onChange={(event) => onChangeLanguage(event.target.value)}
             label="Age"
           >
-            <MenuItem value={"cpp17"}>c++ 17</MenuItem>
+            <MenuItem value={"python"}>Python 3</MenuItem>
             <MenuItem value={"java"}>Java</MenuItem>
-            <MenuItem value={"python3"}>Python</MenuItem>
+            <MenuItem value={"c_cpp"}>C++ 17</MenuItem>
           </Select>
         </FormControl>
-      </div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => runCode()}
-        disabled={status === "Run" ? false : true}
-        className="customButton"
-      >
-        {status}
-      </Button>
-    </div>
+      </Grid>
+      <Grid item md={3}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => runCode()}
+          disabled={status === "Run" ? false : true}
+          size="large"
+          className={classes.customButtom}
+        >
+          {status}
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
